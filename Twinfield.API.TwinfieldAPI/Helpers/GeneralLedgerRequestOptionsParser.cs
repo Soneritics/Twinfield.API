@@ -4,8 +4,16 @@ using Twinfield.API.TwinfieldAPI.Dto.ProcessXml;
 
 namespace Twinfield.API.TwinfieldAPI.Helpers
 {
+    /// <summary>
+    /// Parser class for the request options. Parses an object to XML.
+    /// </summary>
     internal static class GeneralLedgerRequestOptionsParser
     {
+        /// <summary>
+        /// Parses the specified list.
+        /// </summary>
+        /// <param name="list">The list.</param>
+        /// <returns></returns>
         public static string Parse(List<GeneralLedgerRequestOption> list)
         {
             var balanceSheetDataRequest = new StringBuilder();
