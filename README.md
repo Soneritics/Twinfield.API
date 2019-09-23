@@ -4,6 +4,7 @@ This project contains an API for [Twinfield](https://twinfield.com/).
 The API is based on the [Twinfield API specification](https://c3.twinfield.com/webservices/documentation/#/GettingStarted/WebServicesOverview).
 
 # Remarks
+* For now it's used primarily to get the data to show a balance sheet and profit & loss overview.
 * Not all Twinfield API functionality is provided by this API. Only the functionalities that I need for my projects.
 * BankBookService API is not included at all.
 
