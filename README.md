@@ -40,7 +40,7 @@ foreach (var field in balanceSheetFields)
 
 
 // Example #4: Get the fields for profit and loss
-var pnlFields = await factory.FinderService.GetBalanceSheetFields(company);
+var pnlFields = await factory.FinderService.GetProfitAndLossFields(company);
 Console.WriteLine("Profit & Loss fields:");
 foreach (var field in pnlFields)
 {
