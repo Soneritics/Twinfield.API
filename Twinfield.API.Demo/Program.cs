@@ -25,9 +25,6 @@ namespace Twinfield.API.Demo
         private static int toMonth = 2;
         private static int toYear = DateTime.Now.Year;
 
-        private static string from = $"{DateTime.Now.ToString("yyyy")}/00";
-        private static string to = $"{DateTime.Now.ToString("yyyy")}/{DateTime.Now.ToString("MM")}";
-
         static async Task Main(string[] args)
         {
             // Authentication
