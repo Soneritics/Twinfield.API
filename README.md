@@ -25,6 +25,11 @@ foreach (var o in officeList)
 	Console.WriteLine("{0,10} {1,20} {2}", o.Code, o.ShortName, o.Name);
 }
 
+
+// Example #2: Switch company
+await factory.SessionService.SelectCompany(company);
+
+
 // Log off
 await Authentication.Logout(session);
 ```

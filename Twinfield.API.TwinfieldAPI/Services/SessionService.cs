@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Twinfield.API.TwinfieldAPI.Dto;
+using Twinfield.API.TwinfieldAPI.Exceptions;
 using TwinfieldSessionService;
 
 namespace Twinfield.API.TwinfieldAPI.Services
@@ -47,6 +48,19 @@ namespace Twinfield.API.TwinfieldAPI.Services
             {
                 SoapClient.CloseAsync();
             }
+        }
+
+        /// <summary>
+        /// Selects a company.
+        /// </summary>
+        /// <param name="companyCode">The company code.</param>
+        /// <exception cref="InvalidCompanyException">Could not switch to company '{company}'</exception>
+        public async Task SelectCompany(string companyCode)
+        {
+            var companySelectResult = await SoapClient.SelectCompanyAsync(new Header() { SessionID = Session.SessionId }, companyCode);
+
+            if (companySelectResult.SelectCompanyResult != SelectCompanyResult.Ok)
+                throw new InvalidCompanyException("Could not switch to company '{company}'");
         }
 
         /// <summary>
