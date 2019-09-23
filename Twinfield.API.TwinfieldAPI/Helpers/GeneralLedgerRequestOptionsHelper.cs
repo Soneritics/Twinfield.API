@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Twinfield.API.TwinfieldAPI.Dto.ProcessXml;
+using Twinfield.API.TwinfieldAPI.Utilities;
 
 namespace Twinfield.API.TwinfieldAPI.Helpers
 {
@@ -46,17 +47,7 @@ namespace Twinfield.API.TwinfieldAPI.Helpers
             if (first == null)
                 throw new ArgumentException("The field 'fin.trs.head.yearperiod' must be included in the includeFields parameter.");
 
-            if (fromYear < 1000 || fromYear > 2100)
-                throw new ArgumentException("The 'fromYear' parameter must be a 4-digit, valid year.");
-
-            if (toYear < 1000 || toYear > 2100)
-                throw new ArgumentException("The 'toYear' parameter must be a 4-digit, valid year.");
-
-            if (fromMonth < 0 || fromMonth > 12) // Yes, 0 is actually valid
-                throw new ArgumentException("The 'fromMonth' parameter must be a valid month (0-12)");
-
-            if (toMonth < 0 || toMonth > 12) // Yes, 0 is actually valid
-                throw new ArgumentException("The 'toMonth' parameter must be a valid month (0-12)");
+            PeriodValidator.Validate(fromYear, fromMonth, toYear, toMonth);
 
             first.From = $"{fromYear}/{fromMonth.ToString().PadLeft(2, '0')}";
             first.To = $"{toYear}/{toMonth.ToString().PadLeft(2, '0')}";
