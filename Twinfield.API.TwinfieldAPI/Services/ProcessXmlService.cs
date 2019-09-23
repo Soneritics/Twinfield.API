@@ -67,6 +67,32 @@ namespace Twinfield.API.TwinfieldAPI.Services
         }
 
         /// <summary>
+        /// Gets the general ledger request options.
+        /// </summary>
+        /// <param name="companyCode">The company code.</param>
+        /// <returns></returns>
+        public async Task<List<GeneralLedgerRequestOption>> GetGeneralLedgerRequestOptions(string companyCode)
+        {
+            var document = XElement.Parse($"<read><type>browse</type><code>030_2</code><office>{companyCode}</office></read>");
+            var dataRequestOptions = await SoapClient.ProcessXmlDocumentAsync(
+                new Header() { SessionID = Session.SessionId },
+                document
+            );
+
+            return dataRequestOptions.ProcessXmlDocumentResult.LastNode.XPathSelectElements("column")
+                .Select(d => new GeneralLedgerRequestOption()
+                {
+                    Id = d.Attribute("id")?.Value,
+                    Label = d.XPathSelectElement("label").Value,
+                    Field = d.XPathSelectElement("field").Value,
+                    Visible = d.XPathSelectElement("visible").Value == "true",
+                    Ask = d.XPathSelectElement("ask").Value == "true",
+                    Operator = d.XPathSelectElement("operator").Value
+                })
+                .ToList();
+        }
+
+        /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
