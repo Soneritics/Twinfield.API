@@ -85,7 +85,35 @@ foreach (var d in data)
 }
 
 
+// Example #8: Reading data from the general ledger
+var glData = await factory.ProcessXmlService.GetGeneralLedgerData(requestData);
+Console.WriteLine("General Ledger data headers:");
+foreach (var h in glData.Headers)
+{
+	Console.WriteLine($"\t{h.Value.Label} ({h.Value.ValueType})");
+}
 
+Console.WriteLine("General Ledger data lines (max 10 lines):");
+foreach (var h in glData.Data.Take(10))
+{
+	Console.WriteLine("{");
+
+	foreach (var r in h)
+	{
+		Console.WriteLine("\t{0,35} {1,25} {2}", r.Field, r.Label, r.Value.ToString());
+	}
+
+	Console.WriteLine("}");
+}
+
+Console.WriteLine("{...}");
+
+
+// Example #9: Reading data without even fetching the request options.
+// This can be used instead of Example #5 up till #8
+var list = GeneralLedgerRequestOptionsLists.GetMinimumRequestOptionsList(fromYear, fromMonth, toYear, toMonth);
+var glData = await factory.ProcessXmlService.GetGeneralLedgerData(requestData);
+// Output is the same as in Example #8
 
 
 // Log off

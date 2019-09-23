@@ -5,6 +5,8 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using Twinfield.API.TwinfieldAPI.Dto;
 using Twinfield.API.TwinfieldAPI.Dto.ProcessXml;
+using Twinfield.API.TwinfieldAPI.Dto.ProcessXml.GeneralLedgerData;
+using Twinfield.API.TwinfieldAPI.Helpers;
 using TwinfieldProcessXmlService;
 
 namespace Twinfield.API.TwinfieldAPI.Services
@@ -90,6 +92,60 @@ namespace Twinfield.API.TwinfieldAPI.Services
                     Operator = d.XPathSelectElement("operator").Value
                 })
                 .ToList();
+        }
+
+        /// <summary>
+        /// Read data from the the general ledger.
+        /// </summary>
+        /// <param name="requestOptions">The request options.</param>
+        /// <returns></returns>
+        public async Task<GeneralLedgerData> GetGeneralLedgerData(List<GeneralLedgerRequestOption> requestOptions)
+        {
+            var requestString = GeneralLedgerRequestOptionsParser.Parse(requestOptions);
+
+            var balanceSheetDataResult = await SoapClient.ProcessXmlDocumentAsync(
+                new Header() { SessionID = Session.SessionId },
+                XElement.Parse(requestString)
+            );
+
+            var balanceSheetHeaders = new Dictionary<string, TwinfieldDataLineHeader>();
+            var balanceSheetDataList = new List<List<TwinfieldDataLine>>();
+            var firstNode = true;
+            foreach (var row in balanceSheetDataResult.ProcessXmlDocumentResult.Elements())
+            {
+                if (firstNode)
+                {
+                    foreach (var el in row.XPathSelectElements("td"))
+                        balanceSheetHeaders[el.Value] = new TwinfieldDataLineHeader()
+                        {
+                            ValueType = el.Attribute("type")?.Value,
+                            Label = el.Attribute("label")?.Value
+                        };
+
+                    firstNode = false;
+                }
+                else
+                {
+                    var rowData = new List<TwinfieldDataLine>();
+                    foreach (var el in row.XPathSelectElements("td"))
+                    {
+                        rowData.Add(new TwinfieldDataLine()
+                        {
+                            Field = el.Attribute("field")?.Value,
+                            Label = balanceSheetHeaders[el.Attribute("field")?.Value]?.Label,
+                            Value = new TwinfieldValue(balanceSheetHeaders[el.Attribute("field")?.Value]?.ValueType, el.Value)
+                        });
+                    }
+
+                    balanceSheetDataList.Add(rowData);
+                }
+            }
+
+            return new GeneralLedgerData()
+            {
+                Headers = balanceSheetHeaders,
+                Data = balanceSheetDataList
+            };
         }
 
         /// <summary>

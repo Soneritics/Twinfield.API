@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Twinfield.API.TwinfieldAPI.Dto.ProcessXml;
 
 namespace Twinfield.API.TwinfieldAPI.Helpers
@@ -11,26 +10,6 @@ namespace Twinfield.API.TwinfieldAPI.Helpers
     /// </summary>
     public static class GeneralLedgerRequestOptionsHelper
     {
-        public static List<string> MinimalList = new List<string>()
-        {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-        };
-            
         /// <summary>
         /// Gets a valid request list from the full set. Also providing methods to help with date ranges.
         /// </summary>
@@ -43,7 +22,8 @@ namespace Twinfield.API.TwinfieldAPI.Helpers
         /// <exception cref="Exception">dunno..</exception>
         public static List<GeneralLedgerRequestOption> GetRequestList(List<GeneralLedgerRequestOption> optionsList, int fromYear, int fromMonth, int toYear, int toMonth)
         {
-            var includeFields = new List<string>() {"fin.trs.head.yearperiod"};
+            var includeFields = optionsList.Where(i => i.Visible).Select(i => i.Field).ToList();
+            includeFields.Add("fin.trs.head.yearperiod");
             return GetRequestList(optionsList, fromYear, fromMonth, toYear, toMonth, includeFields);
         }
 
@@ -60,7 +40,7 @@ namespace Twinfield.API.TwinfieldAPI.Helpers
         /// <exception cref="ArgumentException">The field 'fin.trs.head.yearperiod' must be included in the includeFields parameter.</exception>
         public static List<GeneralLedgerRequestOption> GetRequestList(List<GeneralLedgerRequestOption> optionsList, int fromYear, int fromMonth, int toYear, int toMonth, List<string> includeFields)
         {
-            var minimalList = optionsList.Where(o => o.Visible || includeFields.Contains(o.Field)).ToList();
+            var minimalList = optionsList.Where(o => includeFields.Contains(o.Field)).ToList();
 
             var first = minimalList.FirstOrDefault(o => o.Field == "fin.trs.head.yearperiod");
             if (first == null)
