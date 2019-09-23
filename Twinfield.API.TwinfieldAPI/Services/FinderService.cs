@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Twinfield.API.TwinfieldAPI.Dto;
+using Twinfield.API.TwinfieldAPI.Dto.Financial;
 using TwinfieldFinderService;
 
 namespace Twinfield.API.TwinfieldAPI.Services
@@ -46,7 +47,7 @@ namespace Twinfield.API.TwinfieldAPI.Services
         /// <returns></returns>
         public async Task<Dictionary<string, string>> GetBalanceSheetFields(string companyCode)
         {
-            return await GetFields(companyCode, "BAS");
+            return await GetFields(companyCode, FinancialType.BalanceSheet);
         }
 
         /// <summary>
@@ -56,7 +57,7 @@ namespace Twinfield.API.TwinfieldAPI.Services
         /// <returns></returns>
         public async Task<Dictionary<string, string>> GetProfitAndLossFields(string companyCode)
         {
-            return await GetFields(companyCode, "PNL");
+            return await GetFields(companyCode, FinancialType.ProfitAndLoss);
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace Twinfield.API.TwinfieldAPI.Services
         /// <param name="companyCode">The company code.</param>
         /// <param name="dimType">Type of the dim. BAS for Balance Sheet, PNL for Profit and Loss</param>
         /// <returns></returns>
-        private async Task<Dictionary<string, string>> GetFields(string companyCode, string dimType)
+        private async Task<Dictionary<string, string>> GetFields(string companyCode, string financialType)
         {
             var searchRequest = new SearchRequest()
             {
@@ -78,7 +79,7 @@ namespace Twinfield.API.TwinfieldAPI.Services
                 options = new[]
                 {
                     new [] { "section", "financials" },
-                    new [] { "dimtype", dimType },
+                    new [] { "dimtype", financialType },
                     new [] { "office", companyCode }
                 }
             };
