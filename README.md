@@ -30,6 +30,24 @@ foreach (var o in officeList)
 await factory.SessionService.SelectCompany(company);
 
 
+// Example #3: Get the fields for the balance sheet
+var balanceSheetFields = await factory.FinderService.GetBalanceSheetFields(company);
+Console.WriteLine("Balance sheet fields:");
+foreach (var field in balanceSheetFields)
+{
+	Console.WriteLine("{0,10} {1}", field.Key, field.Value);
+}
+
+
+// Example #4: Get the fields for profit and loss
+var pnlFields = await factory.FinderService.GetBalanceSheetFields(company);
+Console.WriteLine("Profit & Loss fields:");
+foreach (var field in pnlFields)
+{
+	Console.WriteLine("{0,10} {1}", field.Key, field.Value);
+}
+
+
 // Log off
 await Authentication.Logout(session);
 ```

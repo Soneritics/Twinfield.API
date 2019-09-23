@@ -1,4 +1,7 @@
-﻿using Twinfield.API.TwinfieldAPI.Dto;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Twinfield.API.TwinfieldAPI.Dto;
 using TwinfieldFinderService;
 
 namespace Twinfield.API.TwinfieldAPI.Services
@@ -34,6 +37,56 @@ namespace Twinfield.API.TwinfieldAPI.Services
         {
             Session = session;
             SoapClient = new FinderSoapClient(GetServiceBinding(), GetEndpoint());
+        }
+
+        /// <summary>
+        /// Gets the balance sheet fields (code & name).
+        /// </summary>
+        /// <param name="companyCode">The company code.</param>
+        /// <returns></returns>
+        public async Task<Dictionary<string, string>> GetBalanceSheetFields(string companyCode)
+        {
+            return await GetFields(companyCode, "BAS");
+        }
+
+        /// <summary>
+        /// Gets the profit and loss fields (code & name).
+        /// </summary>
+        /// <param name="companyCode">The company code.</param>
+        /// <returns></returns>
+        public async Task<Dictionary<string, string>> GetProfitAndLossFields(string companyCode)
+        {
+            return await GetFields(companyCode, "PNL");
+        }
+
+        /// <summary>
+        /// Gets the fields for either a Balance Sheet or Profit and Loss.
+        /// </summary>
+        /// <param name="companyCode">The company code.</param>
+        /// <param name="dimType">Type of the dim. BAS for Balance Sheet, PNL for Profit and Loss</param>
+        /// <returns></returns>
+        private async Task<Dictionary<string, string>> GetFields(string companyCode, string dimType)
+        {
+            var searchRequest = new SearchRequest()
+            {
+                Header = new Header() { SessionID = Session.SessionId },
+                type = "DIM",
+                pattern = "*",
+                field = 0,
+                firstRow = 1,
+                maxRows = int.MaxValue,
+                options = new[]
+                {
+                    new [] { "section", "financials" },
+                    new [] { "dimtype", dimType },
+                    new [] { "office", companyCode }
+                }
+            };
+            var searchResults = await SoapClient.SearchAsync(searchRequest);
+
+            return searchResults.data.Items
+                .Select(s => new { Code = s[0], Name = s[1] })
+                .ToDictionary(d => d.Code, d => d.Name);
         }
 
         /// <summary>
