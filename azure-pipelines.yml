@@ -22,6 +22,7 @@ steps:
   inputs:
     command: 'pack'
     arguments: '--configuration $(buildConfiguration)'
+    projects: '**/Twinfield.API.TwinfieldAPI.csproj'
 
 - task: NuGetCommand@2
   inputs:
