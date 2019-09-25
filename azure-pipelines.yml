@@ -14,7 +14,7 @@ steps:
   inputs:
     command: 'build'
     arguments: '--configuration $(buildConfiguration)'
-    projects: '**/*.csproj'
+    projects: '**/Twinfield.API.TwinfieldAPI.csproj'
 
 
 - task: DotNetCoreCLI@2
