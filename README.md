@@ -1,7 +1,12 @@
+[![Build Status](https://soneritics.visualstudio.com/Twinfield%20API/_apis/build/status/Soneritics.Twinfield.API?branchName=master)](https://soneritics.visualstudio.com/Twinfield%20API/_build/latest?definitionId=1&branchName=master)
+
 # Introduction 
 This project contains an API for [Twinfield](https://twinfield.com/).
 
 The API is based on the [Twinfield API specification](https://c3.twinfield.com/webservices/documentation/#/GettingStarted/WebServicesOverview).
+
+# NuGet
+The package is available via NuGet.org: Twinfield.API.TwinfieldAPI
 
 # Remarks
 * For now it's used primarily to get the data to show a balance sheet and profit & loss overview.
