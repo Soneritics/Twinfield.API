@@ -79,6 +79,14 @@ namespace Twinfield.API.TwinfieldAPI.Utilities
                 Visible = true,
                 Ask = false,
                 Operator = "none"
+            },
+            new GeneralLedgerRequestOption()
+            {
+                Field = "fin.trs.line.dim2name",
+                Label = "Kpl./rel.",
+                Visible = true,
+                Ask = true,
+                Operator = "between"
             }
         };
 
