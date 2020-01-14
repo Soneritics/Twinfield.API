@@ -70,11 +70,11 @@ namespace Twinfield.API.TwinfieldAPI.Dto.ProcessXml.GeneralLedgerData
                     break;
 
                 case "decimal":
-                    _decimalValue = string.IsNullOrEmpty(value) ? 0 : decimal.Parse(value);
+                    _decimalValue = string.IsNullOrEmpty(value) ? 0 : decimal.Parse(value, CultureInfo.InvariantCulture);
                     break;
 
                 case "value":
-                    _valueValue = string.IsNullOrEmpty(value) ? 0 : decimal.Parse(value);
+                    _valueValue = string.IsNullOrEmpty(value) ? 0 : decimal.Parse(value, CultureInfo.InvariantCulture);
                     break;
 
                 case "datetime":
