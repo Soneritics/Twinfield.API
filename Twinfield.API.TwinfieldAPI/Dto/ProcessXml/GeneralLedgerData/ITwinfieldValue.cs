@@ -26,13 +26,13 @@ namespace Twinfield.API.TwinfieldAPI.Dto.ProcessXml.GeneralLedgerData
         /// Gets the decimal.
         /// </summary>
         /// <returns></returns>
-        double GetDecimal();
+        decimal GetDecimal();
 
         /// <summary>
         /// Gets the value.
         /// </summary>
         /// <returns></returns>
-        double GetValue();
+        decimal GetValue();
 
         /// <summary>
         /// Gets the date time.

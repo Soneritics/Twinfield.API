@@ -31,12 +31,12 @@ namespace Twinfield.API.TwinfieldAPI.Dto.ProcessXml.GeneralLedgerData
         /// <summary>
         /// The decimal value
         /// </summary>
-        private readonly double _decimalValue;
+        private readonly decimal _decimalValue;
 
         /// <summary>
         /// The value value
         /// </summary>
-        private readonly double _valueValue;
+        private readonly decimal _valueValue;
 
         /// <summary>
         /// The datetime value
@@ -70,11 +70,11 @@ namespace Twinfield.API.TwinfieldAPI.Dto.ProcessXml.GeneralLedgerData
                     break;
 
                 case "decimal":
-                    _decimalValue = string.IsNullOrEmpty(value) ? 0 : double.Parse(value);
+                    _decimalValue = string.IsNullOrEmpty(value) ? 0 : decimal.Parse(value);
                     break;
 
                 case "value":
-                    _valueValue = string.IsNullOrEmpty(value) ? 0 : double.Parse(value);
+                    _valueValue = string.IsNullOrEmpty(value) ? 0 : decimal.Parse(value);
                     break;
 
                 case "datetime":
@@ -136,7 +136,7 @@ namespace Twinfield.API.TwinfieldAPI.Dto.ProcessXml.GeneralLedgerData
         /// Gets the decimal.
         /// </summary>
         /// <returns></returns>
-        public double GetDecimal()
+        public decimal GetDecimal()
         {
             return _decimalValue;
         }
@@ -145,7 +145,7 @@ namespace Twinfield.API.TwinfieldAPI.Dto.ProcessXml.GeneralLedgerData
         /// Gets the value.
         /// </summary>
         /// <returns></returns>
-        public double GetValue()
+        public decimal GetValue()
         {
             return _valueValue;
         }
