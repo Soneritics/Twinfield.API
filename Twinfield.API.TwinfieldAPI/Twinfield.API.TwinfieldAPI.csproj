@@ -3,7 +3,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Twinfield.API.TwinfieldAPI</PackageId>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <Authors>Soneritics</Authors>
     <Description>API for Twinfield</Description>
     <IsPackable>true</IsPackable>
