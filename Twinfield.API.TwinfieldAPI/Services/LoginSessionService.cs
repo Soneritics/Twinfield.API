@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Twinfield.API.TwinfieldAPI.Dto;
 using Twinfield.API.TwinfieldAPI.Exceptions;
 using TwinfieldLoginSessionService;

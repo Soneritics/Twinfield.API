@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
-using Twinfield.API.TwinfieldAPI.Dto;
 
 namespace Twinfield.API.TwinfieldAPI.Services
 {

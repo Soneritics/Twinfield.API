@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Twinfield.API.TwinfieldAPI.Dto.ProcessXml
+﻿namespace Twinfield.API.TwinfieldAPI.Dto.ProcessXml
 {
     /// <summary>
     /// General ledger request option

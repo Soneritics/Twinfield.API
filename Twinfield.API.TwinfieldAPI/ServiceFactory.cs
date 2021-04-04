@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Twinfield.API.TwinfieldAPI.Dto;
+﻿using Twinfield.API.TwinfieldAPI.Dto;
 using Twinfield.API.TwinfieldAPI.Services;
 
 namespace Twinfield.API.TwinfieldAPI
@@ -27,7 +24,7 @@ namespace Twinfield.API.TwinfieldAPI
         /// <value>
         /// The session service.
         /// </value>
-        public SessionService SessionService => _sessionService ?? (_sessionService = new SessionService(_session));
+        public SessionService SessionService => _sessionService ??= new SessionService(_session);
 
         /// <summary>
         /// The process XML service
@@ -40,7 +37,7 @@ namespace Twinfield.API.TwinfieldAPI
         /// <value>
         /// The process XML service.
         /// </value>
-        public ProcessXmlService ProcessXmlService => _processXmlService ?? (_processXmlService = new ProcessXmlService(_session));
+        public ProcessXmlService ProcessXmlService => _processXmlService ??= new ProcessXmlService(_session);
 
         /// <summary>
         /// The finder service
@@ -53,7 +50,7 @@ namespace Twinfield.API.TwinfieldAPI
         /// <value>
         /// The finder service.
         /// </value>
-        public FinderService FinderService => _finderService ?? (_finderService = new FinderService(_session));
+        public FinderService FinderService => _finderService ??= new FinderService(_session);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ServiceFactory"/> class.

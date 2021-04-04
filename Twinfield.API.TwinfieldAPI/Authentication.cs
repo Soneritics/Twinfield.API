@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Twinfield.API.TwinfieldAPI.Dto;
 using Twinfield.API.TwinfieldAPI.Services;
 
@@ -20,10 +17,8 @@ namespace Twinfield.API.TwinfieldAPI
 
         public static async Task<Session> PasswordLogin(string user, string password, string organization)
         {
-            using (var service = new LoginSessionService(LoginClusterUri))
-            {
-                return await service.PasswordLogin(user, password, organization);
-            }
+            using var service = new LoginSessionService(LoginClusterUri);
+            return await service.PasswordLogin(user, password, organization);
         }
 
         /// <summary>
@@ -32,10 +27,8 @@ namespace Twinfield.API.TwinfieldAPI
         /// <param name="session">The session.</param>
         public static async Task Logout(Session session)
         {
-            using (var service = new SessionService(session))
-            {
-                await service.Logout();
-            }
+            using var service = new SessionService(session);
+            await service.Logout();
         }
     }
 }
