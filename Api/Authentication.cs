@@ -11,13 +11,16 @@ namespace Api
     public static class Authentication
     {
         /// <summary>
-        /// The login URI, which is the same constant for any cluster
+        /// Logs in using user/password.
+        /// This will be phased out in 2021.
         /// </summary>
-        private const string LoginClusterUri = "https://login.twinfield.com";
-
+        /// <param name="user">The user.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="organization">The organization.</param>
+        /// <returns></returns>
         public static async Task<Session> PasswordLogin(string user, string password, string organization)
         {
-            using var service = new LoginSessionService(LoginClusterUri);
+            using var service = new LoginSessionService();
             return await service.PasswordLogin(user, password, organization);
         }
 

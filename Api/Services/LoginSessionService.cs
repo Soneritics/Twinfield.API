@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Api.Dto;
 using Api.Exceptions;
-using TwinfieldLoginSessionService;
+using TwinfieldSessionService;
 
 namespace Api.Services
 {
@@ -25,7 +25,7 @@ namespace Api.Services
         /// Also instantiates a new SessionSoapClient instance.
         /// </summary>
         /// <param name="clusterUri">The cluster URI.</param>
-        public LoginSessionService(string clusterUri) : base(clusterUri)
+        public LoginSessionService(string clusterUri = "https://login.twinfield.com") : base(clusterUri)
         {
             SoapClient = new SessionSoapClient(GetServiceBinding(), GetEndpoint());
         }
