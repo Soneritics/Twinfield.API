@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Twinfield.API.TwinfieldAPI.Dto.ProcessXml;
 
 namespace Twinfield.API.TwinfieldAPI.Utilities
@@ -87,6 +86,14 @@ namespace Twinfield.API.TwinfieldAPI.Utilities
                 Visible = true,
                 Ask = true,
                 Operator = "between"
+            },
+            new GeneralLedgerRequestOption()
+            {
+                Ask = true,
+                Field = "fin.trs.head.status",
+                Label = "Status",
+                Operator = "equal",
+                Visible = true
             }
         };
 
