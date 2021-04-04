@@ -11,7 +11,7 @@ namespace TwinfieldSessionService
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.twinfield.com/", ConfigurationName="TwinfieldSessionService.SessionSoap")]
     public interface SessionSoap
     {
@@ -53,13 +53,19 @@ namespace TwinfieldSessionService
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.twinfield.com/")]
     public partial class Header
     {
         
         private string sessionIDField;
+        
+        private string accessTokenField;
+        
+        private string companyCodeField;
+        
+        private System.Nullable<System.Guid> companyIdField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -74,10 +80,52 @@ namespace TwinfieldSessionService
                 this.sessionIDField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string AccessToken
+        {
+            get
+            {
+                return this.accessTokenField;
+            }
+            set
+            {
+                this.accessTokenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string CompanyCode
+        {
+            get
+            {
+                return this.companyCodeField;
+            }
+            set
+            {
+                this.companyCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=3)]
+        public System.Nullable<System.Guid> CompanyId
+        {
+            get
+            {
+                return this.companyIdField;
+            }
+            set
+            {
+                this.companyIdField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.twinfield.com/")]
     public enum LogonResult
     {
@@ -108,7 +156,7 @@ namespace TwinfieldSessionService
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.twinfield.com/")]
     public enum LogonAction
     {
@@ -124,7 +172,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Logon", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class LogonRequest
     {
@@ -151,7 +199,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="LogonResponse", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class LogonResponse
     {
@@ -182,7 +230,7 @@ namespace TwinfieldSessionService
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.twinfield.com/")]
     public enum SMSLogonResult
     {
@@ -201,7 +249,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SmsLogon", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class SmsLogonRequest
     {
@@ -224,7 +272,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SmsLogonResponse", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class SmsLogonResponse
     {
@@ -247,7 +295,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SmsSendCode", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class SmsSendCodeRequest
@@ -267,7 +315,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SmsSendCodeResponse", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class SmsSendCodeResponse
@@ -287,7 +335,7 @@ namespace TwinfieldSessionService
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.twinfield.com/")]
     public enum ChangePasswordResult
     {
@@ -309,7 +357,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ChangePassword", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class ChangePasswordRequest
     {
@@ -336,7 +384,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ChangePasswordResponse", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class ChangePasswordResponse
     {
@@ -359,7 +407,7 @@ namespace TwinfieldSessionService
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.twinfield.com/")]
     public enum SelectCompanyResult
     {
@@ -372,7 +420,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SelectCompany", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class SelectCompanyRequest
@@ -396,7 +444,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SelectCompanyResponse", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class SelectCompanyResponse
@@ -416,7 +464,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="KeepAlive", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class KeepAliveRequest
@@ -436,7 +484,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="KeepAliveResponse", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class KeepAliveResponse
@@ -448,7 +496,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Abandon", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class AbandonRequest
@@ -468,7 +516,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="AbandonResponse", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class AbandonResponse
@@ -480,7 +528,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRole", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class GetRoleRequest
@@ -500,7 +548,7 @@ namespace TwinfieldSessionService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRoleResponse", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class GetRoleResponse
@@ -519,13 +567,13 @@ namespace TwinfieldSessionService
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     public interface SessionSoapChannel : TwinfieldSessionService.SessionSoap, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     public partial class SessionSoapClient : System.ServiceModel.ClientBase<TwinfieldSessionService.SessionSoap>, TwinfieldSessionService.SessionSoap
     {
         
@@ -685,11 +733,11 @@ namespace TwinfieldSessionService
         {
             if ((endpointConfiguration == EndpointConfiguration.SessionSoap))
             {
-                return new System.ServiceModel.EndpointAddress("https://c1.twinfield.com/webservices/session.asmx");
+                return new System.ServiceModel.EndpointAddress("https://accounting.twinfield.com/webservices/session.asmx");
             }
             if ((endpointConfiguration == EndpointConfiguration.SessionSoap12))
             {
-                return new System.ServiceModel.EndpointAddress("https://c1.twinfield.com/webservices/session.asmx");
+                return new System.ServiceModel.EndpointAddress("https://accounting.twinfield.com/webservices/session.asmx");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

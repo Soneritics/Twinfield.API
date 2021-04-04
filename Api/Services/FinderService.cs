@@ -64,7 +64,7 @@ namespace Api.Services
         /// Gets the fields for either a Balance Sheet or Profit and Loss.
         /// </summary>
         /// <param name="companyCode">The company code.</param>
-        /// <param name="dimType">Type of the dim. BAS for Balance Sheet, PNL for Profit and Loss</param>
+        /// <param name="financialType">Type of the dim. BAS for Balance Sheet, PNL for Profit and Loss</param>
         /// <returns></returns>
         private async Task<Dictionary<string, string>> GetFields(string companyCode, string financialType)
         {

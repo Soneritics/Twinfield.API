@@ -11,7 +11,7 @@ namespace TwinfieldFinderService
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.twinfield.com/", ConfigurationName="TwinfieldFinderService.FinderSoap")]
     public interface FinderSoap
     {
@@ -23,13 +23,19 @@ namespace TwinfieldFinderService
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.twinfield.com/")]
     public partial class Header
     {
         
         private string sessionIDField;
+        
+        private string accessTokenField;
+        
+        private string companyCodeField;
+        
+        private System.Nullable<System.Guid> companyIdField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -44,10 +50,52 @@ namespace TwinfieldFinderService
                 this.sessionIDField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string AccessToken
+        {
+            get
+            {
+                return this.accessTokenField;
+            }
+            set
+            {
+                this.accessTokenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string CompanyCode
+        {
+            get
+            {
+                return this.companyCodeField;
+            }
+            set
+            {
+                this.companyCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=3)]
+        public System.Nullable<System.Guid> CompanyId
+        {
+            get
+            {
+                return this.companyIdField;
+            }
+            set
+            {
+                this.companyIdField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.twinfield.com/")]
     public partial class FinderData
@@ -105,7 +153,7 @@ namespace TwinfieldFinderService
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.twinfield.com/")]
     public partial class MessageOfErrorCodes
@@ -177,7 +225,7 @@ namespace TwinfieldFinderService
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.twinfield.com/")]
     public enum MessageType
     {
@@ -193,7 +241,7 @@ namespace TwinfieldFinderService
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.twinfield.com/")]
     public enum ErrorCodes
     {
@@ -229,10 +277,10 @@ namespace TwinfieldFinderService
         ParameterTooSmall,
         
         /// <remarks/>
-        OptionLevelMandatoryForSectionTEQ,
+        OptionLevelMandatoryForSectionTeq,
         
         /// <remarks/>
-        OptionICIncompatableWithOptionHidden,
+        OptionIcIncompatibleWithOptionHidden,
         
         /// <remarks/>
         InvalidDateTimeOptionLength,
@@ -247,6 +295,9 @@ namespace TwinfieldFinderService
         OptionMandatory,
         
         /// <remarks/>
+        AccessDenied,
+        
+        /// <remarks/>
         DisableAccessRulesNotAllowed,
         
         /// <remarks/>
@@ -254,7 +305,7 @@ namespace TwinfieldFinderService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Search", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class SearchRequest
     {
@@ -299,7 +350,7 @@ namespace TwinfieldFinderService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="SearchResponse", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class SearchResponse
     {
@@ -321,13 +372,13 @@ namespace TwinfieldFinderService
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     public interface FinderSoapChannel : TwinfieldFinderService.FinderSoap, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     public partial class FinderSoapClient : System.ServiceModel.ClientBase<TwinfieldFinderService.FinderSoap>, TwinfieldFinderService.FinderSoap
     {
         
@@ -411,11 +462,11 @@ namespace TwinfieldFinderService
         {
             if ((endpointConfiguration == EndpointConfiguration.FinderSoap))
             {
-                return new System.ServiceModel.EndpointAddress("https://c1.twinfield.com/webservices/finder.asmx");
+                return new System.ServiceModel.EndpointAddress("https://accounting.twinfield.com/webservices/finder.asmx");
             }
             if ((endpointConfiguration == EndpointConfiguration.FinderSoap12))
             {
-                return new System.ServiceModel.EndpointAddress("https://c1.twinfield.com/webservices/finder.asmx");
+                return new System.ServiceModel.EndpointAddress("https://accounting.twinfield.com/webservices/finder.asmx");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

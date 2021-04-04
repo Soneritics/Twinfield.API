@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Api.Dto;
 using Api.Dto.ProcessXml;
 using Api.Dto.ProcessXml.GeneralLedgerData;
+using Api.Extensions;
 using Api.Helpers;
 using TwinfieldProcessXmlService;
 
@@ -50,22 +53,24 @@ namespace Api.Services
         /// <returns></returns>
         public async Task<List<Office>> GetOfficeList()
         {
-            var document = XElement.Parse("<list><type>offices</type></list>");
+            var document = "<list><type>offices</type></list>";
             var officeListResult = await SoapClient.ProcessXmlDocumentAsync(
                 new Header() { SessionID = Session.SessionId },
-                document
+                document.ToXmlNode()
             );
 
-            var list = officeListResult.ProcessXmlDocumentResult.XPathSelectElements("office")
-                .Select(o => new Office()
+            var result = new List<Office>();
+            foreach (XmlNode node in officeListResult.ProcessXmlDocumentResult.ChildNodes)
+            {
+                result.Add(new Office()
                 {
-                    Code = o.Value,
-                    Name = o.Attribute("name")?.Value,
-                    ShortName = o.Attribute("shortname")?.Value
-                })
-                .ToList();
+                    Code = node.InnerText,
+                    Name = node.Attributes["name"]?.Value,
+                    ShortName = node.Attributes["shortname"]?.Value
+                });
+            }
 
-            return list;
+            return result;
         }
 
         /// <summary>
@@ -75,23 +80,36 @@ namespace Api.Services
         /// <returns></returns>
         public async Task<List<GeneralLedgerRequestOption>> GetGeneralLedgerRequestOptions(string companyCode)
         {
-            var document = XElement.Parse($"<read><type>browse</type><code>030_2</code><office>{companyCode}</office></read>");
+            var document = $"<read><type>browse</type><code>030_2</code><office>{companyCode}</office></read>";
             var dataRequestOptions = await SoapClient.ProcessXmlDocumentAsync(
                 new Header() { SessionID = Session.SessionId },
-                document
+                document.ToXmlNode()
             );
 
-            return dataRequestOptions.ProcessXmlDocumentResult.LastNode.XPathSelectElements("column")
-                .Select(d => new GeneralLedgerRequestOption()
+            var result = new List<GeneralLedgerRequestOption>();
+            foreach (XmlNode node in dataRequestOptions.ProcessXmlDocumentResult.LastChild.ChildNodes)
+            {
+                var glro = new GeneralLedgerRequestOption()
                 {
-                    Id = d.Attribute("id")?.Value,
-                    Label = d.XPathSelectElement("label").Value,
-                    Field = d.XPathSelectElement("field").Value,
-                    Visible = d.XPathSelectElement("visible").Value == "true",
-                    Ask = d.XPathSelectElement("ask").Value == "true",
-                    Operator = d.XPathSelectElement("operator").Value
-                })
-                .ToList();
+                    Id = node.Attributes["id"]?.Value
+                };
+
+                foreach (XmlNode childElement in node.ChildNodes)
+                {
+                    switch (childElement.Name)
+                    {
+                        case "label": glro.Label = childElement.InnerText; break;
+                        case "field": glro.Field = childElement.InnerText; break;
+                        case "operator": glro.Operator = childElement.InnerText; break;
+                        case "visible": glro.Visible = childElement.InnerText.Equals("true"); break;
+                        case "ask": glro.Ask = childElement.InnerText.Equals("true"); break;
+                    }
+                }
+
+                result.Add(glro);
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -102,39 +120,46 @@ namespace Api.Services
         public async Task<GeneralLedgerData> GetGeneralLedgerData(List<GeneralLedgerRequestOption> requestOptions)
         {
             var requestString = GeneralLedgerRequestOptionsParser.Parse(requestOptions);
-
             var balanceSheetDataResult = await SoapClient.ProcessXmlDocumentAsync(
                 new Header() { SessionID = Session.SessionId },
-                XElement.Parse(requestString)
+                requestString.ToXmlNode()
             );
 
             var balanceSheetHeaders = new Dictionary<string, TwinfieldDataLineHeader>();
             var balanceSheetDataList = new List<List<TwinfieldDataLine>>();
             var firstNode = true;
-            foreach (var row in balanceSheetDataResult.ProcessXmlDocumentResult.Elements())
+            foreach (XmlNode row in balanceSheetDataResult.ProcessXmlDocumentResult)
             {
                 if (firstNode)
                 {
-                    foreach (var el in row.XPathSelectElements("td"))
-                        balanceSheetHeaders[el.Value] = new TwinfieldDataLineHeader()
+                    foreach (XmlNode el in row.ChildNodes)
+                    {
+                        if (el.Name.Equals("td"))
                         {
-                            ValueType = el.Attribute("type")?.Value,
-                            Label = el.Attribute("label")?.Value
-                        };
+                            balanceSheetHeaders[el.InnerText] = new TwinfieldDataLineHeader()
+                            {
+                                ValueType = el.Attributes["type"]?.Value,
+                                Label = el.Attributes["label"]?.Value
+                            };
+                        }
+                    }
 
                     firstNode = false;
                 }
                 else
                 {
                     var rowData = new List<TwinfieldDataLine>();
-                    foreach (var el in row.XPathSelectElements("td"))
+                    foreach (XmlNode el in row)
                     {
-                        rowData.Add(new TwinfieldDataLine()
+                        if (el.Name.Equals("td"))
                         {
-                            Field = el.Attribute("field")?.Value,
-                            Label = balanceSheetHeaders[el.Attribute("field")?.Value]?.Label,
-                            Value = new TwinfieldValue(balanceSheetHeaders[el.Attribute("field")?.Value]?.ValueType, el.Value)
-                        });
+                            rowData.Add(new TwinfieldDataLine()
+                            {
+                                Field = el.Attributes["field"]?.Value,
+                                Label = balanceSheetHeaders[el.Attributes["field"]?.Value]?.Label,
+                                Value = new TwinfieldValue(balanceSheetHeaders[el.Attributes["field"]?.Value]?.ValueType, el.InnerText)
+                            });
+                        }
                     }
 
                     balanceSheetDataList.Add(rowData);

@@ -11,7 +11,7 @@ namespace TwinfieldProcessXmlService
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.twinfield.com/", ConfigurationName="TwinfieldProcessXmlService.ProcessXmlSoap")]
     public interface ProcessXmlSoap
     {
@@ -30,13 +30,19 @@ namespace TwinfieldProcessXmlService
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.twinfield.com/")]
     public partial class Header
     {
         
         private string sessionIDField;
+        
+        private string accessTokenField;
+        
+        private string companyCodeField;
+        
+        private System.Nullable<System.Guid> companyIdField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -51,10 +57,52 @@ namespace TwinfieldProcessXmlService
                 this.sessionIDField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string AccessToken
+        {
+            get
+            {
+                return this.accessTokenField;
+            }
+            set
+            {
+                this.accessTokenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string CompanyCode
+        {
+            get
+            {
+                return this.companyCodeField;
+            }
+            set
+            {
+                this.companyCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=3)]
+        public System.Nullable<System.Guid> CompanyId
+        {
+            get
+            {
+                return this.companyIdField;
+            }
+            set
+            {
+                this.companyIdField = value;
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ProcessXmlString", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class ProcessXmlStringRequest
@@ -78,7 +126,7 @@ namespace TwinfieldProcessXmlService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ProcessXmlStringResponse", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class ProcessXmlStringResponse
@@ -98,7 +146,7 @@ namespace TwinfieldProcessXmlService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ProcessXmlDocument", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class ProcessXmlDocumentRequest
@@ -108,13 +156,13 @@ namespace TwinfieldProcessXmlService
         public TwinfieldProcessXmlService.Header Header;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.twinfield.com/", Order=0)]
-        public System.Xml.Linq.XElement xmlRequest;
+        public System.Xml.XmlNode xmlRequest;
         
         public ProcessXmlDocumentRequest()
         {
         }
         
-        public ProcessXmlDocumentRequest(TwinfieldProcessXmlService.Header Header, System.Xml.Linq.XElement xmlRequest)
+        public ProcessXmlDocumentRequest(TwinfieldProcessXmlService.Header Header, System.Xml.XmlNode xmlRequest)
         {
             this.Header = Header;
             this.xmlRequest = xmlRequest;
@@ -122,27 +170,27 @@ namespace TwinfieldProcessXmlService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ProcessXmlDocumentResponse", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class ProcessXmlDocumentResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.twinfield.com/", Order=0)]
-        public System.Xml.Linq.XElement ProcessXmlDocumentResult;
+        public System.Xml.XmlNode ProcessXmlDocumentResult;
         
         public ProcessXmlDocumentResponse()
         {
         }
         
-        public ProcessXmlDocumentResponse(System.Xml.Linq.XElement ProcessXmlDocumentResult)
+        public ProcessXmlDocumentResponse(System.Xml.XmlNode ProcessXmlDocumentResult)
         {
             this.ProcessXmlDocumentResult = ProcessXmlDocumentResult;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ProcessXmlCompressed", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class ProcessXmlCompressedRequest
@@ -167,7 +215,7 @@ namespace TwinfieldProcessXmlService
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ProcessXmlCompressedResponse", WrapperNamespace="http://www.twinfield.com/", IsWrapped=true)]
     public partial class ProcessXmlCompressedResponse
@@ -187,13 +235,13 @@ namespace TwinfieldProcessXmlService
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     public interface ProcessXmlSoapChannel : TwinfieldProcessXmlService.ProcessXmlSoap, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.1-preview-30514-0828")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     public partial class ProcessXmlSoapClient : System.ServiceModel.ClientBase<TwinfieldProcessXmlService.ProcessXmlSoap>, TwinfieldProcessXmlService.ProcessXmlSoap
     {
         
@@ -250,7 +298,7 @@ namespace TwinfieldProcessXmlService
             return base.Channel.ProcessXmlDocumentAsync(request);
         }
         
-        public System.Threading.Tasks.Task<TwinfieldProcessXmlService.ProcessXmlDocumentResponse> ProcessXmlDocumentAsync(TwinfieldProcessXmlService.Header Header, System.Xml.Linq.XElement xmlRequest)
+        public System.Threading.Tasks.Task<TwinfieldProcessXmlService.ProcessXmlDocumentResponse> ProcessXmlDocumentAsync(TwinfieldProcessXmlService.Header Header, System.Xml.XmlNode xmlRequest)
         {
             TwinfieldProcessXmlService.ProcessXmlDocumentRequest inValue = new TwinfieldProcessXmlService.ProcessXmlDocumentRequest();
             inValue.Header = Header;
@@ -314,11 +362,11 @@ namespace TwinfieldProcessXmlService
         {
             if ((endpointConfiguration == EndpointConfiguration.ProcessXmlSoap))
             {
-                return new System.ServiceModel.EndpointAddress("https://c1.twinfield.com/webservices/processxml.asmx");
+                return new System.ServiceModel.EndpointAddress("https://accounting.twinfield.com/webservices/processxml.asmx");
             }
             if ((endpointConfiguration == EndpointConfiguration.ProcessXmlSoap12))
             {
-                return new System.ServiceModel.EndpointAddress("https://c1.twinfield.com/webservices/processxml.asmx");
+                return new System.ServiceModel.EndpointAddress("https://accounting.twinfield.com/webservices/processxml.asmx");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

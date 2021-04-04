@@ -16,10 +16,11 @@ namespace Demo
         private static ServiceFactory factory;
 
         // Demo data
-        private static string user = "";
-        private static string password = "";
-        private static string organization = "";
-        private static string company = "";
+        private static string user = "jordi";
+        private static string password = "welkom123";
+        private static string organization = "fhc";
+        private static string company = "80281"; // Vital gerard
+        //private static string company = "1090"; // Family Ijburg
         private static int fromMonth = 0;
         private static int fromYear = DateTime.Now.Year;
         private static int toMonth = 2;
