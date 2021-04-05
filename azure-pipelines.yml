@@ -14,7 +14,7 @@ steps:
   inputs:
     command: 'build'
     arguments: '--configuration $(buildConfiguration)'
-    projects: '**/Twinfield.API.TwinfieldAPI.csproj'
+    projects: '**/Api.csproj'
 
 
 - task: DotNetCoreCLI@2
@@ -22,7 +22,7 @@ steps:
   inputs:
     command: 'pack'
     arguments: '--configuration $(buildConfiguration)'
-    projects: '**/Twinfield.API.TwinfieldAPI.csproj'
+    projects: '**/ApiI.csproj'
 
 - task: NuGetCommand@2
   inputs:
@@ -30,7 +30,7 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NuGet'
-    packagesToPack: '**/Twinfield.API.TwinfieldAPI.csproj'
+    packagesToPack: '**/Api.csproj'
     nobuild: true
     versioningScheme: 'off'
 
