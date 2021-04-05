@@ -1,4 +1,4 @@
-﻿namespace Api.Services
+﻿namespace Api.Services.Data
 {
     public interface IService
     {

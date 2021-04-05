@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Linq;
-using System.Xml.XPath;
 using Api.Dto;
 using Api.Dto.ProcessXml;
 using Api.Dto.ProcessXml.GeneralLedgerData;
@@ -12,21 +8,21 @@ using Api.Extensions;
 using Api.Helpers;
 using TwinfieldProcessXmlService;
 
-namespace Api.Services
+namespace Api.Services.Data
 {
     /// <summary>
-    /// ProcessXmlService, uses the Twinfield ProcessXml API.
+    /// ProcessXmlDataService, uses the Twinfield ProcessXml API.
     /// </summary>
     /// <seealso cref="ProcessXmlSoapClient" />
-    public class ProcessXmlService : AbstractService<ProcessXmlSoapClient>
+    public class ProcessXmlDataService : AbstractDataService<ProcessXmlSoapClient>
     {
         /// <summary>
-        /// Gets or sets the session.
+        /// Gets or sets the soapHeader.
         /// </summary>
         /// <value>
-        /// The session.
+        /// The soapHeader.
         /// </value>
-        public Session Session { get; set; }
+        public ISoapHeader SoapHeader { get; set; }
 
         /// <summary>
         /// Gets the service endpoint.
@@ -37,13 +33,13 @@ namespace Api.Services
         public override string ServiceEndpoint { get; } = "/webservices/processxml.asmx";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProcessXmlService"/> class.
-        /// Uses the Session object to authorize against the service.
+        /// Initializes a new instance of the <see cref="ProcessXmlDataService"/> class.
+        /// Uses the SoapHeader object to authorize against the service.
         /// </summary>
-        /// <param name="session">The session.</param>
-        public ProcessXmlService(Session session) : base(session.ClusterUri)
+        /// <param name="soapHeader">The soapHeader.</param>
+        public ProcessXmlDataService(ISoapHeader soapHeader) : base(soapHeader.ClusterUri)
         {
-            Session = session;
+            SoapHeader = soapHeader;
             SoapClient = new ProcessXmlSoapClient(GetServiceBinding(), GetEndpoint());
         }
 
@@ -55,7 +51,7 @@ namespace Api.Services
         {
             var document = "<list><type>offices</type></list>";
             var officeListResult = await SoapClient.ProcessXmlDocumentAsync(
-                new Header() { SessionID = Session.SessionId },
+                await SoapHeader.GetHeaderAsync(new Header()),
                 document.ToXmlNode()
             );
 
@@ -82,7 +78,7 @@ namespace Api.Services
         {
             var document = $"<read><type>browse</type><code>030_2</code><office>{companyCode}</office></read>";
             var dataRequestOptions = await SoapClient.ProcessXmlDocumentAsync(
-                new Header() { SessionID = Session.SessionId },
+                await SoapHeader.GetHeaderAsync(new Header()),
                 document.ToXmlNode()
             );
 
@@ -121,7 +117,7 @@ namespace Api.Services
         {
             var requestString = GeneralLedgerRequestOptionsParser.Parse(requestOptions);
             var balanceSheetDataResult = await SoapClient.ProcessXmlDocumentAsync(
-                new Header() { SessionID = Session.SessionId },
+                await SoapHeader.GetHeaderAsync(new Header()),
                 requestString.ToXmlNode()
             );
 

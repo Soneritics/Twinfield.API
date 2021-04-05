@@ -5,21 +5,21 @@ using Api.Dto;
 using Api.Dto.Financial;
 using TwinfieldFinderService;
 
-namespace Api.Services
+namespace Api.Services.Data
 {
     /// <summary>
-    /// FinderService, uses the Twinfield Finder API.
+    /// FinderDataService, uses the Twinfield Finder API.
     /// </summary>
     /// <seealso cref="FinderSoapClient" />
-    public class FinderService : AbstractService<FinderSoapClient>
+    public class FinderDataService : AbstractDataService<FinderSoapClient>
     {
         /// <summary>
-        /// Gets or sets the session.
+        /// Gets or sets the soapHeader.
         /// </summary>
         /// <value>
-        /// The session.
+        /// The soapHeader.
         /// </value>
-        public Session Session { get; set; }
+        public ISoapHeader SoapHeader { get; set; }
 
         /// <summary>
         /// Gets the service endpoint.
@@ -30,13 +30,13 @@ namespace Api.Services
         public override string ServiceEndpoint { get; } = "/webservices/finder.asmx";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FinderService"/> class.
-        /// Uses the Session object to authorize against the service.
+        /// Initializes a new instance of the <see cref="FinderDataService"/> class.
+        /// Uses the SoapHeader object to authorize against the service.
         /// </summary>
-        /// <param name="session">The session.</param>
-        public FinderService(Session session) : base(session.ClusterUri)
+        /// <param name="soapHeader">The soapHeader.</param>
+        public FinderDataService(ISoapHeader soapHeader) : base(soapHeader.ClusterUri)
         {
-            Session = session;
+            SoapHeader = soapHeader;
             SoapClient = new FinderSoapClient(GetServiceBinding(), GetEndpoint());
         }
 
@@ -70,7 +70,7 @@ namespace Api.Services
         {
             var searchRequest = new SearchRequest()
             {
-                Header = new Header() { SessionID = Session.SessionId },
+                Header = await SoapHeader.GetHeaderAsync(new Header()),
                 type = "DIM",
                 pattern = "*",
                 field = 0,

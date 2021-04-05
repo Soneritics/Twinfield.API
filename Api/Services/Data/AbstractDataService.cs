@@ -1,15 +1,15 @@
 ﻿using System;
 using System.ServiceModel;
 
-namespace Api.Services
+namespace Api.Services.Data
 {
-    public abstract class AbstractService<T> : IService, IDisposable where T : class
+    public abstract class AbstractDataService<T> : IService, IDisposable where T : class
     {
         public abstract string ServiceEndpoint { get; }
         protected T SoapClient { get; set; }
         private readonly string _clusterUri;
 
-        protected AbstractService(string clusterUri)
+        protected AbstractDataService(string clusterUri)
         {
             _clusterUri = clusterUri;
         }
