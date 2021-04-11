@@ -34,15 +34,9 @@ namespace Api
             }
         }
 
-        private AuthenticationService _authenticationService;
-        protected AuthenticationService AuthenticationService => _authenticationService
-            ??= new AuthenticationService(_oAuthClientSettings, _httpClient);
+        protected AuthenticationService AuthenticationService => new AuthenticationService(_oAuthClientSettings, _httpClient);
+        protected AuthorizationService AuthorizationService => new AuthorizationService(_oAuthClientSettings, Token, _httpClient);
 
-        private AuthorizationService _authorizationService;
-        protected AuthorizationService AuthorizationService => _authorizationService
-            ??= new AuthorizationService(_oAuthClientSettings, Token, _httpClient);
-
-        private ServiceFactory _serviceFactory;
         public ServiceFactory ServiceFactory
         {
             get
@@ -57,7 +51,7 @@ namespace Api
                     throw new TokenExpiredException();
                 }
 
-                return _serviceFactory ??= new ServiceFactory(GetSoapHeader().GetAwaiter().GetResult());
+                return new ServiceFactory(GetSoapHeader().GetAwaiter().GetResult());
             }
         }
         #endregion
