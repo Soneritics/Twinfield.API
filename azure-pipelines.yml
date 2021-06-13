@@ -16,7 +16,6 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
     projects: '**/Api.csproj'
 
-
 - task: DotNetCoreCLI@2
   displayName: "dotnet pack"
   inputs:
