@@ -93,6 +93,16 @@ namespace Api
             await GetSoapHeader();
         }
 
+        public async Task RefreshTokenAsync(string refreshToken)
+        {
+            Token = new OAuthToken()
+            {
+                RefreshToken = refreshToken
+            };
+
+            await RefreshTokenAsync();
+        }
+
         public void SetCompany(string companyCode)
         {
             _soapHeader.Company = companyCode;
